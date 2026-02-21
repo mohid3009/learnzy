@@ -4,11 +4,11 @@ FROM node:18-alpine
 WORKDIR /usr/src/app
 
 # Install app dependencies
-# A wildcard is used to ensure both package.json AND package-lock.json are copied
-# where available (npm@5+)
+# We use a wildcard to ensure both package.json AND package-lock.json are copied
 COPY package*.json ./
 
-RUN npm install --production
+# Use --omit=dev instead of --production to avoid warnings in npm 8+
+RUN npm install --omit=dev
 
 # Bundle app source
 COPY . .
